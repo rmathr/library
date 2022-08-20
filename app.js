@@ -19,12 +19,15 @@ Book.prototype.info = function(){
 
 const book1 = new Book("Winds of Winter","George R.R. Martin", 785, "not read");
 const book2 = new Book("The Hobbit","J.R.R Tolkien", 324, "read");
+const book3 = new Book("Stardust","Neil Gaiman", 217, "read");
 
 book1.prototype = Object.create(Book.prototype);
 book2.prototype = Object.create(Book.prototype);
+book3.prototype = Object.create(Book.prototype);
 
 myLibrary.push(book1);
 myLibrary.push(book2);
+myLibrary.push(book3);
 
 
 // ----------- test book ----------- 
@@ -32,7 +35,19 @@ myLibrary.push(book2);
 myLibrary.forEach(book => {
     //mainContent.append(book.title);
     const card = document.createElement('div');
-    card.textContent = `${book.title}`;
+    const bookTitle = document.createElement('p');
+    const bookAuthor = document.createElement('p');
+    const bookPages = document.createElement('p');
+    const bookRead = document.createElement('p');
+    bookTitle.textContent = `${book.title}`;
+    bookAuthor.textContent = `${book.author}`;
+    bookPages.textContent = `${book.pages}`;
+    bookRead.textContent = `${book.read}`;
+    card.appendChild(bookTitle);
+    card.appendChild(bookAuthor);
+    card.appendChild(bookPages);
+    card.appendChild(bookRead);
+    card.classList.add('card');
     mainContent.appendChild(card);
 })
 
