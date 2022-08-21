@@ -6,7 +6,7 @@ const bookTitle = document.getElementById('bookTitle');
 const bookAuthor = document.getElementById('bookAuthor');
 const bookPages = document.getElementById('bookPages');
 const bookRead = document.getElementById('bookRead');
-
+const includeBook = document.getElementById('includeBook') ;
 
 
 
@@ -71,14 +71,6 @@ addBook.addEventListener('click', () => {
     }
 })
 
-
-
-
-function generateCards(){
-    for(let i = 0; i < numSquares*numSquares; i++){
-        square.classList.add('square');
-        square.style.width = `${600/numSquares}px`;
-        square.style.height =`${600/numSquares}px`;
-        container.appendChild(square.cloneNode(true));  
-    }
-}
+includeBook.addEventListener('click', e => {
+    e.preventDefault();
+})
