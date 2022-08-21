@@ -12,7 +12,23 @@
 <body>
     <div class="main-container">
         <header class="main-header">Library App</header>
-        <main class="main-content" id="mainContent"></main>
+        <main class="main-content" id="mainContent">
+            <div class="book-cards" id="bookCards"></div>
+            <button class="add-book" id="addBook">+</button>
+        </main>
+        <div class="book-submit" id="bookSubmit">
+            <form action="" class="new-book" id="newBook">
+                <label for="bookTitle">Title</label>
+                <input type="text" name="addBook" id="bookTitle">
+                <label for="bookAuthor">Author</label>
+                <input type="text" name="addBook" id="bookAuthor">
+                <label for="bookPages">Pages</label>
+                <input type="number" name="addBook" id="bookPages">
+                <label for="bookRead">Read</label>
+                <input type="text" name="addBook" id="bookRead">
+            </form>
+            <button type="submit" id="bookSubmit" form="newBook">Add</button>
+        </div>
         <footer class="footer"></footer>
     </div>
 

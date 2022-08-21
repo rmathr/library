@@ -1,5 +1,14 @@
 //const card = document.createElement('div');
 const mainContent = document.getElementById('mainContent');
+const bookCards = document.getElementById('bookCards');
+const addBook = document.getElementById('addBook');
+const bookTitle = document.getElementById('bookTitle');
+const bookAuthor = document.getElementById('bookAuthor');
+const bookPages = document.getElementById('bookPages');
+const bookRead = document.getElementById('bookRead');
+
+
+
 
 let myLibrary = [];
 
@@ -48,7 +57,18 @@ myLibrary.forEach(book => {
     card.appendChild(bookPages);
     card.appendChild(bookRead);
     card.classList.add('card');
-    mainContent.appendChild(card);
+    bookCards.appendChild(card);
+})
+
+
+addBook.addEventListener('click', () => {
+    const bookSubmit = document.getElementById('bookSubmit')
+
+    if (bookSubmit.style.display === 'none'){
+        bookSubmit.style.display = 'grid';
+    } else {
+        bookSubmit.style.display = 'none';
+    }
 })
 
 
