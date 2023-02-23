@@ -19,15 +19,26 @@
         <div class="book-submit" id="bookSubmit">
             <form action="" class="new-book" id="newBook">
                 <label for="bookTitle">Title</label>
-                <input type="text" name="addBook" id="bookTitle">
+                <input type="text" name="bookTitle" id="bookTitle">
                 <label for="bookAuthor">Author</label>
-                <input type="text" name="addBook" id="bookAuthor">
+                <input type="text" name="bookAuthor" id="bookAuthor">
                 <label for="bookPages">Pages</label>
-                <input type="number" name="addBook" id="bookPages">
-                <label for="bookRead">Read</label>
-                <input type="text" name="addBook" id="bookRead">
+                <input type="number" name="bookPages" id="bookPages">
+                
+                
+                
+                <!-- <label for="bookRead">Read</label>
+                <input type="text" name="bookRead" id="bookRead"> -->
+
+                <!-- change input above and below this line -->
+                    <label>Read</label>
+                    <label class="switch">
+                        <input type="checkbox" name="bookRead" id="bookRead">
+                        <span class="slider round"></span>
+                      </label>
+                    <label>Not read</label>
             </form>
-            <button type="submit" id="includeBook" form="newBook">Add</button>
+            <button type="submit" class="include-book" id="includeBook" form="newBook">Add</button>
         </div>
         <footer class="footer"></footer>
     </div>
