@@ -8,9 +8,8 @@ const bookPagesInput = document.getElementById('bookPages');
 const bookReadInput = document.getElementById('bookRead');
 const includeBook = document.getElementById('includeBook');
 const newBook = document.getElementById('newBook');
+const bookSubmit = document.getElementById('bookSubmit')
 let bookIsRead = true;
-
-
 
 const myLibrary = [];
 
@@ -28,38 +27,32 @@ Book.prototype.info = function(){
 Book.prototype.changeReadStatus = function (){
     if(this.read){
         bookIsRead = false
-        console.log(bookIsRead)
     } else {
         bookIsRead = true
-        console.log(bookIsRead)
     }
+    this.read = bookIsRead
+    displayBooks(myLibrary)
 }
 
-// ----------- test book ----------- 
 
-// const book1 = new Book("Winds of Winter","George R.R. Martin", 785, "not read");
-// const book2 = new Book("The Hobbit","J.R.R Tolkien", 324, "read");
-// const book3 = new Book("Stardust","Neil Gaiman", 217, "read");
+Book.prototype.deleteBook = function () {
+    const index = myLibrary.indexOf(this);
+    myLibrary.splice(index,1);
+    displayBooks(myLibrary)
+}
 
 
-// book1.prototype = Object.create(Book.prototype);
-// book2.prototype = Object.create(Book.prototype);
-// book3.prototype = Object.create(Book.prototype);
-
-// myLibrary.push(book1);
-// myLibrary.push(book2);
-// myLibrary.push(book3);
-
-// ----------- test book ----------- 
-
-addBook.addEventListener('click', () => {
-    const bookSubmit = document.getElementById('bookSubmit')
-
+const handleBookForm = function (){
     if (bookSubmit.style.display === 'none'){
         bookSubmit.style.display = 'grid';
     } else {
         bookSubmit.style.display = 'none';
     }
+}
+
+addBook.addEventListener('click', e => {
+    e.preventDefault();
+    handleBookForm ()
 })
 
 newBook.addEventListener('submit', e => {
@@ -68,9 +61,6 @@ newBook.addEventListener('submit', e => {
     displayBooks(myLibrary)
 })
 
-
-
-//const blackColorSelector = document.querySelector('input[type=checkbox]');
 bookReadInput.addEventListener('change', () => {
     if (bookReadInput.checked) {
         console.log("Checkbox is checked..");
@@ -82,7 +72,6 @@ bookReadInput.addEventListener('change', () => {
         bookIsRead = true;
     }
   });
-
 
 const saveBook = function (){
     const bookInput = new Book(`${bookTitleInput.value}`,`${bookAuthorInput.value}`, `${bookPagesInput.value}`, bookIsRead)
@@ -96,18 +85,6 @@ const displayBooks = function (myLib){
         loopBooks(book) 
     }) 
 }
-
-const createButton = function (buttonName){
-     window[buttonName] = document.createElement('button');
-        buttonName.textContent = "Test";
-
-        buttonName.addEventListener('click',  e =>{
-            e.preventDefault();
-            console.log("Teste");
-            //this.changeReadStatus()
-        })
-}
-
 
 function loopBooks (book){
     const card = document.createElement('div');
@@ -123,14 +100,20 @@ function loopBooks (book){
     toggleRead.textContent = "Test";
     toggleRead.addEventListener('click',  e =>{
         e.preventDefault();
-        console.log(book.title);
         book.changeReadStatus()
+    })
+    const deleteBook = document.createElement('button');
+    deleteBook.textContent = "Delete";
+    deleteBook.addEventListener('click', e => {
+        e.preventDefault();
+        book.deleteBook()
     })
     card.appendChild(bookTitle);
     card.appendChild(bookAuthor);
     card.appendChild(bookPages);
     card.appendChild(bookRead);
     card.appendChild(toggleRead);
+    card.appendChild(deleteBook);
     card.classList.add('card');
     bookCards.appendChild(card);  
 }

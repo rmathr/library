@@ -6,37 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./icon/bookstore.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="app.js" defer></script>
     <title>Library App</title>
 </head>
 <body>
     <div class="main-container">
-        <header class="main-header">Library App</header>
+        <header class="main-header">
+            <i class="fa-solid fa-info"></i>
+            <div class="header-text">
+                Library</div>
+            </header>
         <main class="main-content" id="mainContent">
             <div class="book-cards" id="bookCards"></div>
             <button class="add-book" id="addBook">+</button>
         </main>
-        <div class="book-submit" id="bookSubmit">
-            <form action="" class="new-book" id="newBook">
-                <label for="bookTitle">Title</label>
-                <input type="text" name="bookTitle" id="bookTitle">
-                <label for="bookAuthor">Author</label>
-                <input type="text" name="bookAuthor" id="bookAuthor">
-                <label for="bookPages">Pages</label>
-                <input type="number" name="bookPages" id="bookPages">
-                
-                
-                
-                <!-- <label for="bookRead">Read</label>
-                <input type="text" name="bookRead" id="bookRead"> -->
-
-                <!-- change input above and below this line -->
+        <div class="book-submit" id="bookSubmit" style="display:none;">
+            <div class="form-text">
+                <p class="big-text">Hello!</p>
+                <p class="small-text">Use this form to include a book.</p>
+            </div>
+            
+            <form action="" id="newBook">
+                <div class="new-book">
+                    <input type="text" name="bookTitle" id="bookTitle">
+                    <label for="bookTitle">Title</label>
+                </div>
+                <div class="new-book">
+                    <input type="text" name="bookAuthor" id="bookAuthor">
+                    <label for="bookAuthor">Author</label>
+                </div>
+                <div class="new-book">
+                    <input type="number" name="bookPages" id="bookPages">
+                    <label for="bookPages">Pages</label>
+                </div>
+                <div>
                     <label>Read</label>
-                    <label class="switch">
-                        <input type="checkbox" name="bookRead" id="bookRead">
-                        <span class="slider round"></span>
-                      </label>
-                    <label>Not read</label>
+                        <label class="switch">
+                            <input type="checkbox" name="bookRead" id="bookRead">
+                            <span class="slider round"></span>
+                          </label>
+                        <label>Not read</label>
+                </div>    
             </form>
             <button type="submit" class="include-book" id="includeBook" form="newBook">Add</button>
         </div>
