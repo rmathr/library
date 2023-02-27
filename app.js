@@ -9,7 +9,10 @@ const bookReadInput = document.getElementById('bookRead');
 const includeBook = document.getElementById('includeBook');
 const newBook = document.getElementById('newBook');
 const bookSubmit = document.getElementById('bookSubmit')
+const read = document.getElementById('read')
+const notRead = document.getElementById('notRead')
 let bookIsRead = true;
+
 
 const myLibrary = [];
 
@@ -53,23 +56,36 @@ const handleBookForm = function (){
 addBook.addEventListener('click', e => {
     e.preventDefault();
     handleBookForm ()
+    clearInput()
 })
 
 newBook.addEventListener('submit', e => {
     e.preventDefault();
     saveBook()
     displayBooks(myLibrary)
+    clearInput()
 })
+
+const clearInput = function (){
+    bookTitleInput.value = ''
+    bookAuthorInput.value = ''
+    bookPagesInput.value = ''
+    bookReadInput.checked = false
+    bookIsRead = true
+    read.classList.remove('read-not-read-select')
+    notRead.classList.remove('read-not-read-select')
+}
+
 
 bookReadInput.addEventListener('change', () => {
     if (bookReadInput.checked) {
-        console.log("Checkbox is checked..");
-        //console.log(bookReadInput.value);
         bookIsRead = false;
+        notRead.classList.add('read-not-read-select')
+        read.classList.remove('read-not-read-select')
     } else {
-        console.log("Checkbox is not checked..");
-        //console.log(bookReadInput.value);
         bookIsRead = true;
+        read.classList.add('read-not-read-select')
+        notRead.classList.remove('read-not-read-select')
     }
   });
 
@@ -77,6 +93,7 @@ const saveBook = function (){
     const bookInput = new Book(`${bookTitleInput.value}`,`${bookAuthorInput.value}`, `${bookPagesInput.value}`, bookIsRead)
     console.log(bookInput)
     myLibrary.push(bookInput);
+    handleBookForm ()
 }
 
 const displayBooks = function (myLib){
@@ -89,31 +106,52 @@ const displayBooks = function (myLib){
 function loopBooks (book){
     const card = document.createElement('div');
     const bookTitle = document.createElement('p');
+    const bookTitleLabel = document.createElement('p');
     const bookAuthor = document.createElement('p');
+    const bookAuthorLabel = document.createElement('p');
     const bookPages = document.createElement('p');
+    const bookPagesLabel = document.createElement('p');
     const bookRead = document.createElement('p');
+    const bookReadLabel = document.createElement('p');
+    const bookDivTitle = document.createElement('div');
+    const bookDivAuthor = document.createElement('div');
+    const bookDivPages = document.createElement('div');
     bookTitle.textContent = `${book.title}`;
     bookAuthor.textContent = `${book.author}`;
     bookPages.textContent = `${book.pages}`;
     bookRead.textContent = `${book.read}`;
+    bookTitleLabel.textContent = "Title"
+    bookAuthorLabel.textContent = "Author"
+    bookPagesLabel.textContent = "Pages"
+    bookReadLabel.textContent = "Book read?"
     const toggleRead = document.createElement('button');
-    toggleRead.textContent = "Test";
+    toggleRead.id = "toggleReadButton"
+    toggleRead.textContent = `${book.read? "Read" : "Not read"}`; 
     toggleRead.addEventListener('click',  e =>{
         e.preventDefault();
         book.changeReadStatus()
     })
-    const deleteBook = document.createElement('button');
-    deleteBook.textContent = "Delete";
+    const html = `<button id="deleteButton"><i class="fa-regular fa-trash-can"></i></button>`;
+    const parser = new DOMParser();
+    const parsedDocument = parser.parseFromString(html, "text/html");
+    const deleteBook = parsedDocument.getElementById("deleteButton");;
     deleteBook.addEventListener('click', e => {
         e.preventDefault();
         book.deleteBook()
     })
-    card.appendChild(bookTitle);
-    card.appendChild(bookAuthor);
-    card.appendChild(bookPages);
-    card.appendChild(bookRead);
+    bookDivTitle.appendChild(bookTitleLabel);
+    bookDivTitle.appendChild(bookTitle);
+    card.appendChild(bookDivTitle)
+    bookDivAuthor.appendChild(bookAuthorLabel);
+    bookDivAuthor.appendChild(bookAuthor);
+    card.appendChild(bookDivAuthor)
+    bookDivPages.appendChild(bookPagesLabel);
+    bookDivPages.appendChild(bookPages);
+    card.appendChild(bookDivPages)
     card.appendChild(toggleRead);
     card.appendChild(deleteBook);
     card.classList.add('card');
     bookCards.appendChild(card);  
 }
+
+

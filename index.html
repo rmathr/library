@@ -13,9 +13,8 @@
 <body>
     <div class="main-container">
         <header class="main-header">
-            <i class="fa-solid fa-info"></i>
-            <div class="header-text">
-                Library</div>
+            <i class="fa-solid fa-info header-icon"></i>
+            <div class="header-text">Library</div>
             </header>
         <main class="main-content" id="mainContent">
             <div class="book-cards" id="bookCards"></div>
@@ -27,7 +26,7 @@
                 <p class="small-text">Use this form to include a book.</p>
             </div>
             
-            <form action="" id="newBook">
+            <form action="" id="newBook" autocomplete="off">
                 <div class="new-book">
                     <input type="text" name="bookTitle" id="bookTitle">
                     <label for="bookTitle">Title</label>
@@ -40,18 +39,23 @@
                     <input type="number" name="bookPages" id="bookPages">
                     <label for="bookPages">Pages</label>
                 </div>
-                <div>
-                    <label>Read</label>
-                        <label class="switch">
-                            <input type="checkbox" name="bookRead" id="bookRead">
-                            <span class="slider round"></span>
-                          </label>
-                        <label>Not read</label>
-                </div>    
+                <div class="lower-part-form">
+                    <div class="read-switch">
+                        <label id="read">Read</label>
+                            <label class="switch">
+                                <input type="checkbox" name="bookRead" id="bookRead">
+                                <span class="slider round"></span>
+                              </label>
+                            <label id="notRead">Not read</label>
+                        </div>    
+                        <button type="submit" class="include-book" id="includeBook" form="newBook">Save</button>
+                </div>
             </form>
-            <button type="submit" class="include-book" id="includeBook" form="newBook">Add</button>
         </div>
-        <footer class="footer"></footer>
+        <footer class="footer">
+            <p>rmath ©</p>
+            <a href="https://github.com/rmathr" class="fa-brands fa-github"></a>
+        </footer>
     </div>
 
 
