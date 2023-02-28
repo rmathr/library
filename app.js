@@ -11,6 +11,7 @@ const newBook = document.getElementById('newBook');
 const bookSubmit = document.getElementById('bookSubmit')
 const read = document.getElementById('read')
 const notRead = document.getElementById('notRead')
+const toggleReadButton = document.getElementById('toggleReadButton')
 let bookIsRead = true;
 
 
@@ -21,6 +22,7 @@ function Book(title, author, pages, read){
     this.author = author
     this.pages = pages
     this.read = read
+    this.elm = null
     }
 
 Book.prototype.info = function(){
@@ -36,7 +38,6 @@ Book.prototype.changeReadStatus = function (){
     this.read = bookIsRead
     displayBooks(myLibrary)
 }
-
 
 Book.prototype.deleteBook = function () {
     const index = myLibrary.indexOf(this);
@@ -91,7 +92,7 @@ bookReadInput.addEventListener('change', () => {
 
 const saveBook = function (){
     const bookInput = new Book(`${bookTitleInput.value}`,`${bookAuthorInput.value}`, `${bookPagesInput.value}`, bookIsRead)
-    console.log(bookInput)
+    //console.log(bookInput)
     myLibrary.push(bookInput);
     handleBookForm ()
 }
@@ -99,12 +100,12 @@ const saveBook = function (){
 const displayBooks = function (myLib){
     document.querySelectorAll('.card').forEach(e => e.remove());
     myLib.forEach(book => {
-        loopBooks(book) 
+        loopBooks(book)
     }) 
 }
 
 function loopBooks (book){
-    const card = document.createElement('div');
+    const card = createElementWithClass('div', 'card');
     const bookTitle = document.createElement('p');
     const bookTitleLabel = document.createElement('p');
     const bookAuthor = document.createElement('p');
@@ -124,13 +125,20 @@ function loopBooks (book){
     bookAuthorLabel.textContent = "Author"
     bookPagesLabel.textContent = "Pages"
     bookReadLabel.textContent = "Book read?"
-    const toggleRead = document.createElement('button');
-    toggleRead.id = "toggleReadButton"
-    toggleRead.textContent = `${book.read? "Read" : "Not read"}`; 
-    toggleRead.addEventListener('click',  e =>{
+    // const toggleRead = document.createElement('button');
+    this.elm = createElementWithClass('button', 'toggle-button')
+    // toggleButtons = document.querySelectorAll('toggle-button')
+    // toggleRead.id = "toggleReadButton"
+    // toggleRead.textContent = `${book.read? "Read" : "Not read"}`; 
+    this.elm.setAttribute('id', myLibrary.indexOf(book))
+    this.elm.textContent = `${book.read? "Read" : "Not read"}`; 
+    // this.elm.style.backgroundColor = `${book.read? "green" : "red"}`
+    this.elm.setAttribute('class', `${book.read? "read-color" : "not-read-color"}`)
+    this.elm.addEventListener('click',  e =>{
         e.preventDefault();
-        book.changeReadStatus()
+        book.changeReadStatus() 
     })
+    
     const html = `<button id="deleteButton"><i class="fa-regular fa-trash-can"></i></button>`;
     const parser = new DOMParser();
     const parsedDocument = parser.parseFromString(html, "text/html");
@@ -148,10 +156,15 @@ function loopBooks (book){
     bookDivPages.appendChild(bookPagesLabel);
     bookDivPages.appendChild(bookPages);
     card.appendChild(bookDivPages)
-    card.appendChild(toggleRead);
+    // card.appendChild(toggleRead);
+    card.appendChild(this.elm);
     card.appendChild(deleteBook);
-    card.classList.add('card');
-    bookCards.appendChild(card);  
+    //card.classList.add('card');
+    bookCards.appendChild(card);
 }
 
-
+function createElementWithClass(type, className){
+    const element = document.createElement(type);
+    element.classList.add(`${className}`)
+    return element
+}

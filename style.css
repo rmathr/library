@@ -138,11 +138,11 @@ input[type=number] {
   color: var(--main-bg-color);
 }
 
-.card .read-color{
+.read-color{
   background-color: rgba(57, 121, 41, 0.4);
 }
 
-.card .not-read-color{
+.not-read-color{
   background-color: rgba(206, 199, 199, 0.4);
 }
 
