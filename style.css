@@ -29,26 +29,38 @@ input[type=number] {
 
 
 :root {
-    --main-bg-color: #d6dce1;
-    --header-bg-color: rgba(63,94,251,1);
-    --cards-bg-color: #87bdd8;
+    /* --main-bg-color: #d6dce1; */
+    --main-bg-color: #f3f2ef;
+    /* --header-bg-color: rgba(63,94,251,1); */
+    --header-bg-color: #FFFFFF;
+    --letters-color: #666666;
+    --success-color: #b1d79f;
+    --cards-bg-color: #cec7c766;
     --buttons-color: #fc466b;
     --gradient-one: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     --gradient-two: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     --gradient-three: linear-gradient(90deg, rgba(112,87,214,1) 0%, rgba(128,85,202,1) 50%, rgba(146,83,188,1) 100%);
 }
 
+body{
+    background-color: var(--main-bg-color);
+    position: relative;
+    height: auto;
+    min-height: 100%;
+}
+
+
 .main-container{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .main-header{
     background-color: var(--header-bg-color);
     width: 100%;
-    height: 15%;
+    height: 124px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,22 +68,26 @@ input[type=number] {
 
 .main-header i {
   font-size: 1.8rem;
-  color: var(--main-bg-color);
+  color: var(--letters-color);
+  /* color: var(--main-bg-color); */
 }
 
 .main-content{
-    background-color: var(--main-bg-color);
+    /* background-color: var(--main-bg-color); */
     /* background-image: url("images/cool-background.png");
     background-repeat: no-repeat;
     background-size: cover; */
     /* background: linear-gradient(#141e30, #243b55,#273b51 ); */
     width: 100%;
     height: 82%;
-    display: grid;
-    grid-template-rows: auto 60px;
-    grid-template-columns: 1fr;
+    /* height: auto; */
+    display: flex;
+    flex-direction: column;
+    /* grid-template-rows: auto 60px;
+    grid-template-columns: 1fr; */
     align-items: center;
     justify-items: center;
+   
 }
 
 .header-text{
@@ -82,23 +98,33 @@ input[type=number] {
     /* font-weight: 700; */
     margin-left: 4px;
     font-family: 'Lobster', cursive;
-    color: var(--main-bg-color);
+    /* color: var(--main-bg-color); */
+    color: var(--letters-color);
+
 }
 
 
 
 .book-cards{
+    min-height: 90%;
+    height: auto;
     width: 90%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    justify-items: center;
-    /* grid-template-rows: 1fr; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(4, minmax(200px, 1fr)); */
+    justify-content: space-evenly;
+    /* grid-template-rows: minmax(200px, 1fr); */
+    /* grid-template-rows: repeat(autofit, minmax(200px, 1fr)); */
+    /* row-gap: 10px; */
+    /* column-gap: 10px; */
+    
 }
 
 
 .card{
-    width: 200px;
-    height: 250px;
+    width: 300px;
+    height: 220px;
     border: none;
     border-radius: 3%;
     background-color: var(--header-bg-color);
@@ -108,24 +134,31 @@ input[type=number] {
     align-items: center;
     padding: 12px;
     box-shadow: 0 5px 10px rgba(0,0,0,.6);
+    margin: 16px
 }
 
 
 .card p {
-    color: var(--main-bg-color)
+    color: var(--letters-color);
+    width: inherit;
+    overflow: hidden;
 }
 
-.card p:nth-child(2n + 1){
+.book-title{
   font-weight: 700;
+  font-size: 1.3rem;
 }
 
-.card div {
+.book-div{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-bottom: 1px solid var(--main-bg-color);
+  align-items: flex-start;
   width: 90%;
   padding-bottom: 8px;
+}
+
+.book-author{
+  margin-bottom: 18px;
 }
 
 .card button:first-of-type{
@@ -134,16 +167,20 @@ input[type=number] {
   height: 2rem;
   border: none;
   font-size: 1rem;
-  
-  color: var(--main-bg-color);
+  color: var(--letters-color);
 }
 
 .read-color{
-  background-color: rgba(57, 121, 41, 0.4);
+  background-color: var(--success-color);
 }
 
 .not-read-color{
-  background-color: rgba(206, 199, 199, 0.4);
+  background-color: var(--cards-bg-color);
+  /* background-color: rgba(206, 199, 199, 0.4); */
+}
+
+.read-color:hover, .not-read-color:hover{
+  cursor: pointer;
 }
 
 #deleteButton {
@@ -152,7 +189,7 @@ input[type=number] {
     /* height: 24px; */
     font-size: 1.7rem;
     background-color: transparent;
-    color: var(--main-bg-color);
+    color: var(--letters-color);
     transition: all 0.25s ease;
 }
 
@@ -162,17 +199,24 @@ input[type=number] {
     cursor: pointer;
 }
 
+.add-book-div{
+    height: 69px;
+    /* align-self: flex-end; */
+    margin: 12px;
+    /* margin: -69px 12px 12px 0; */
+}
+
 .add-book{
     border: none;
-    border-radius: 50%;
+    border-radius: 10%;
     width: 45px;
     height: 45px;
-    justify-self: flex-end;
-    margin: 12px;
-    background-color: var(--buttons-color);
+    /* align-self: flex-end;
+    margin: 12px; */
+    background-color: var(--header-bg-color);
     /* background-image: var(--gradient-two); */
     font-size: 1.8rem;
-    color: var(--main-bg-color);
+    color: var(--letters-color);
     transition: all 0.25s ease;
 }
 
@@ -190,15 +234,16 @@ input[type=number] {
     position: absolute;
     border: none;
     border-radius: 20px;
-    /* background-color: rgba(0, 0, 0, 0.5); */
-    background-image: var(--gradient-three);
+    background-color: var(--header-bg-color);
+    /* background-image: var(--gradient-three); */
     top: 35%;
     padding: 12px;
     left: 39%;
     /* grid-template-rows: repeat(1, 1fr); */
     /* font-size: 1.2rem; */
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    color: var(--main-bg-color);
+    color: var(--letters-color);
+    /* color: var(--main-bg-color); */
 }
 
 .book-submit .new-book{
@@ -210,10 +255,12 @@ input[type=number] {
     width: 100%;
     padding: 10px 0 5px 0;
     font-size: 1.1rem;
-    color: var(--main-bg-color);
+    color: var(--letters-color);
+    /* color: var(--main-bg-color); */
     margin-bottom: 10px;
     border: none;
-    border-bottom: 1px solid var(--main-bg-color);
+    border-bottom: 1px solid var(--letters-color);
+    /* border-bottom: 1px solid var(--main-bg-color); */
     outline: none;
     background: transparent;
     
@@ -225,14 +272,16 @@ input[type=number] {
     left: 0;
     padding-top: 10px;
     /* font-size: 1.3rem; */
-    color: var(--main-bg-color);
+    color: var(--letters-color);
+    /* color: var(--main-bg-color); */
     pointer-events: none;
     transition: .5s;
     font-weight: 700;
 }
 
 #bookAuthor, #bookTitle {
-  color: var(--main-bg-color);
+  color: var(--letters-color);
+  /* color: var(--main-bg-color); */
 }
 
 .book-submit .new-book input:focus ~label,
@@ -261,12 +310,13 @@ input[type=number] {
 }
 
 .include-book{
-  background-color: rgba(146,83,188,1);
+  background-color: var(--letters-color);
   padding: 4px;
   margin-right: 8px;
-  border: 2px solid var(--main-bg-color);
+  border: none;
+  /* border: 2px solid var(--header-bg-color); */
   /* border-radius: 30%; */
-  color: var(--main-bg-color);
+  color: var(--header-bg-color);
   /* opacity: 0.7; */
   font-weight: 700;
   letter-spacing: 3px;
@@ -275,7 +325,7 @@ input[type=number] {
 
 #includeBook:hover{
   transform: scale(1.1);
-  background: rgba(112,87,214,1);
+  background: var(--success-color);
   cursor: pointer;  
 }
 
@@ -286,18 +336,22 @@ input[type=number] {
 
 
 .footer{
-    background-image: var(--gradient-one);
+    /* background-image: var(--gradient-one); */
+    background-color: var(--header-bg-color);
     width: 100%;
-    height: 3%;
+    /* height: 3%; */
+    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--main-bg-color);
+    color: var(--letters-color);
+    /* color: var(--main-bg-color); */
+    margin-top: auto;
 }
 
 .fa-github {
   margin: 12px;
-  color: var(--main-bg-color);
+  color: var(--letters-color);
   font-size: 18px;
 }
 
@@ -327,8 +381,8 @@ input[type=number] {
     right: 0;
     bottom: 0;
     
-    background: #397929;
-    background: rgba(112,87,214,1);
+    background: var(--success-color);
+    /* background: rgba(112,87,214,1); */
     border: 2px solid var(--main-bg-color);
     -webkit-transition: .4s;
     transition: .4s;
@@ -346,9 +400,9 @@ input[type=number] {
     transition: .4s;
   }
   
-  /* input:checked + .slider {
-    background: #878888;
-  } */
+  input:checked + .slider {
+    background: var(--cards-bg-color);
+  }
   
   /* input:focus + .slider {
     box-shadow: 0 0 1px #2196F3;

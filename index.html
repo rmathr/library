@@ -17,9 +17,20 @@
             <div class="header-text">Library</div>
             </header>
         <main class="main-content" id="mainContent">
+            <div class="add-book-div">
+                <button class="add-book" id="addBook">+</button>
+            </div>
             <div class="book-cards" id="bookCards"></div>
-            <button class="add-book" id="addBook">+</button>
+           
         </main>
+
+        
+        <footer class="footer">
+            <p>rmath ©</p>
+            <a href="https://github.com/rmathr" class="fa-brands fa-github"></a>
+        </footer>
+
+
         <div class="book-submit" id="bookSubmit" style="display:none;">
             <div class="form-text">
                 <p class="big-text">Hello!</p>
@@ -28,15 +39,15 @@
             
             <form action="" id="newBook" autocomplete="off">
                 <div class="new-book">
-                    <input type="text" name="bookTitle" id="bookTitle">
+                    <input type="text" name="bookTitle" id="bookTitle" required>
                     <label for="bookTitle">Title</label>
                 </div>
                 <div class="new-book">
-                    <input type="text" name="bookAuthor" id="bookAuthor">
+                    <input type="text" name="bookAuthor" id="bookAuthor" required>
                     <label for="bookAuthor">Author</label>
                 </div>
                 <div class="new-book">
-                    <input type="number" name="bookPages" id="bookPages">
+                    <input type="number" name="bookPages" id="bookPages" min=1 required>
                     <label for="bookPages">Pages</label>
                 </div>
                 <div class="lower-part-form">
@@ -52,10 +63,7 @@
                 </div>
             </form>
         </div>
-        <footer class="footer">
-            <p>rmath ©</p>
-            <a href="https://github.com/rmathr" class="fa-brands fa-github"></a>
-        </footer>
+        
     </div>
 
 

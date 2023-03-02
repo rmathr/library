@@ -14,7 +14,6 @@ const notRead = document.getElementById('notRead')
 const toggleReadButton = document.getElementById('toggleReadButton')
 let bookIsRead = true;
 
-
 const myLibrary = [];
 
 function Book(title, author, pages, read){
@@ -24,10 +23,6 @@ function Book(title, author, pages, read){
     this.read = read
     this.elm = null
     }
-
-Book.prototype.info = function(){
-    return (`${this.title}`);
-}
 
 Book.prototype.changeReadStatus = function (){
     if(this.read){
@@ -44,7 +39,6 @@ Book.prototype.deleteBook = function () {
     myLibrary.splice(index,1);
     displayBooks(myLibrary)
 }
-
 
 const handleBookForm = function (){
     if (bookSubmit.style.display === 'none'){
@@ -77,7 +71,6 @@ const clearInput = function (){
     notRead.classList.remove('read-not-read-select')
 }
 
-
 bookReadInput.addEventListener('change', () => {
     if (bookReadInput.checked) {
         bookIsRead = false;
@@ -92,7 +85,6 @@ bookReadInput.addEventListener('change', () => {
 
 const saveBook = function (){
     const bookInput = new Book(`${bookTitleInput.value}`,`${bookAuthorInput.value}`, `${bookPagesInput.value}`, bookIsRead)
-    //console.log(bookInput)
     myLibrary.push(bookInput);
     handleBookForm ()
 }
@@ -105,61 +97,36 @@ const displayBooks = function (myLib){
 }
 
 function loopBooks (book){
-    const card = createElementWithClass('div', 'card');
-    const bookTitle = document.createElement('p');
-    const bookTitleLabel = document.createElement('p');
-    const bookAuthor = document.createElement('p');
-    const bookAuthorLabel = document.createElement('p');
-    const bookPages = document.createElement('p');
-    const bookPagesLabel = document.createElement('p');
-    const bookRead = document.createElement('p');
-    const bookReadLabel = document.createElement('p');
-    const bookDivTitle = document.createElement('div');
-    const bookDivAuthor = document.createElement('div');
-    const bookDivPages = document.createElement('div');
+    const card = createElementWithClass('div', 'card')
+    const bookTitle = createElementWithClass('p', 'book-title')
+    const bookAuthor = createElementWithClass('p', 'book-author')
+    const bookPages = createElementWithClass('p', 'book-pages')
+    const bookDiv = createElementWithClass('div', 'book-div')
+    const htmlDeleteButtonTag = `<button id="deleteButton"><i class="fa-regular fa-trash-can"></i></button>`;
+    const parser = new DOMParser();
+    const parsedDocument = parser.parseFromString(htmlDeleteButtonTag, "text/html");
+    const deleteBook = parsedDocument.getElementById("deleteButton");;
     bookTitle.textContent = `${book.title}`;
-    bookAuthor.textContent = `${book.author}`;
-    bookPages.textContent = `${book.pages}`;
-    bookRead.textContent = `${book.read}`;
-    bookTitleLabel.textContent = "Title"
-    bookAuthorLabel.textContent = "Author"
-    bookPagesLabel.textContent = "Pages"
-    bookReadLabel.textContent = "Book read?"
-    // const toggleRead = document.createElement('button');
+    bookAuthor.textContent = `by ${book.author}`;
+    bookPages.textContent = `${book.pages} pages`;
     this.elm = createElementWithClass('button', 'toggle-button')
-    // toggleButtons = document.querySelectorAll('toggle-button')
-    // toggleRead.id = "toggleReadButton"
-    // toggleRead.textContent = `${book.read? "Read" : "Not read"}`; 
     this.elm.setAttribute('id', myLibrary.indexOf(book))
     this.elm.textContent = `${book.read? "Read" : "Not read"}`; 
-    // this.elm.style.backgroundColor = `${book.read? "green" : "red"}`
     this.elm.setAttribute('class', `${book.read? "read-color" : "not-read-color"}`)
     this.elm.addEventListener('click',  e =>{
         e.preventDefault();
         book.changeReadStatus() 
     })
-    
-    const html = `<button id="deleteButton"><i class="fa-regular fa-trash-can"></i></button>`;
-    const parser = new DOMParser();
-    const parsedDocument = parser.parseFromString(html, "text/html");
-    const deleteBook = parsedDocument.getElementById("deleteButton");;
     deleteBook.addEventListener('click', e => {
         e.preventDefault();
         book.deleteBook()
     })
-    bookDivTitle.appendChild(bookTitleLabel);
-    bookDivTitle.appendChild(bookTitle);
-    card.appendChild(bookDivTitle)
-    bookDivAuthor.appendChild(bookAuthorLabel);
-    bookDivAuthor.appendChild(bookAuthor);
-    card.appendChild(bookDivAuthor)
-    bookDivPages.appendChild(bookPagesLabel);
-    bookDivPages.appendChild(bookPages);
-    card.appendChild(bookDivPages)
-    // card.appendChild(toggleRead);
+    bookDiv.appendChild(bookTitle);
+    bookDiv.appendChild(bookAuthor);
+    bookDiv.appendChild(bookPages);
+    card.appendChild(bookDiv)
     card.appendChild(this.elm);
     card.appendChild(deleteBook);
-    //card.classList.add('card');
     bookCards.appendChild(card);
 }
 
