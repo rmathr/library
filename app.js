@@ -1,4 +1,3 @@
-//const card = document.createElement('div');
 const mainContent = document.getElementById('mainContent');
 const bookCards = document.getElementById('bookCards');
 const addBook = document.getElementById('addBook');
@@ -16,6 +15,7 @@ let bookIsRead = true;
 
 const myLibrary = [];
 
+//book constructor.
 function Book(title, author, pages, read){
     this.title = title
     this.author = author
@@ -24,6 +24,7 @@ function Book(title, author, pages, read){
     this.elm = null
     }
 
+//function inherited by all book objects. Responsible for handling the toggle of read-not-read status of the books.
 Book.prototype.changeReadStatus = function (){
     if(this.read){
         bookIsRead = false
@@ -34,12 +35,14 @@ Book.prototype.changeReadStatus = function (){
     displayBooks(myLibrary)
 }
 
+//function inherited by all book objects. Responsible for handling the deletion of data for a specific book object.
 Book.prototype.deleteBook = function () {
     const index = myLibrary.indexOf(this);
     myLibrary.splice(index,1);
     displayBooks(myLibrary)
 }
 
+//this function makes the form appear/disappear.
 const handleBookForm = function (){
     if (bookSubmit.style.display === 'none'){
         bookSubmit.style.display = 'grid';
@@ -48,12 +51,14 @@ const handleBookForm = function (){
     }
 }
 
+//this button makes the form appear/disappear and clears the form.
 addBook.addEventListener('click', e => {
     e.preventDefault();
     handleBookForm ()
     clearInput()
 })
 
+//this button call 3 functions: get user input, display that input on DOM and clear the form.
 newBook.addEventListener('submit', e => {
     e.preventDefault();
     saveBook()
@@ -61,6 +66,7 @@ newBook.addEventListener('submit', e => {
     clearInput()
 })
 
+//clear the form after input.
 const clearInput = function (){
     bookTitleInput.value = ''
     bookAuthorInput.value = ''
@@ -71,6 +77,7 @@ const clearInput = function (){
     notRead.classList.remove('read-not-read-select')
 }
 
+//change the style read-not-read toggle switch.
 bookReadInput.addEventListener('change', () => {
     if (bookReadInput.checked) {
         bookIsRead = false;
@@ -83,20 +90,25 @@ bookReadInput.addEventListener('change', () => {
     }
   });
 
-const saveBook = function (){
+//this function create a new book object using the Book constructor (getting the form's input) and saves it in the myLibrary array.
+const saveBook = function (){ 
     const bookInput = new Book(`${bookTitleInput.value}`,`${bookAuthorInput.value}`, `${bookPagesInput.value}`, bookIsRead)
     myLibrary.push(bookInput);
     handleBookForm ()
 }
 
+//this function has two actions:  1) removes cards already printed from the DOM 
+// 2) Call loopBooks() on all book objects saved on the array.
 const displayBooks = function (myLib){
-    document.querySelectorAll('.card').forEach(e => e.remove());
+    document.querySelectorAll('.card').forEach(e => e.remove()); 
     myLib.forEach(book => {
         loopBooks(book)
     }) 
 }
 
-function loopBooks (book){
+//this function creates all the elements which are used in the cards, 
+//assigning the values from the book object to the correct field.
+function loopBooks (book){ 
     const card = createElementWithClass('div', 'card')
     const bookTitle = createElementWithClass('p', 'book-title')
     const bookAuthor = createElementWithClass('p', 'book-author')
@@ -130,6 +142,7 @@ function loopBooks (book){
     bookCards.appendChild(card);
 }
 
+//simple function which creates a dom element and assign it with a class.
 function createElementWithClass(type, className){
     const element = document.createElement(type);
     element.classList.add(`${className}`)
