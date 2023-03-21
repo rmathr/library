@@ -16,31 +16,33 @@ let bookIsRead = true;
 const myLibrary = [];
 
 //book constructor.
-function Book(title, author, pages, read){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    this.elm = null
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.elm = null;
     }
-
-//function inherited by all book objects. Responsible for handling the toggle of read-not-read status of the books.
-Book.prototype.changeReadStatus = function (){
-    if(this.read){
-        bookIsRead = false
-    } else {
-        bookIsRead = true
+    //function inherited by all book objects. Responsible for handling the toggle of read-not-read status of the books.
+    changeReadStatus() {
+        if (this.read) {
+            bookIsRead = false;
+        } else {
+            bookIsRead = true;
+        }
+        this.read = bookIsRead;
+        displayBooks(myLibrary);
     }
-    this.read = bookIsRead
-    displayBooks(myLibrary)
+    //function inherited by all book objects. Responsible for handling the deletion of data for a specific book object.
+    deleteBook() {
+        const index = myLibrary.indexOf(this);
+        myLibrary.splice(index, 1);
+        displayBooks(myLibrary);
+    }
 }
 
-//function inherited by all book objects. Responsible for handling the deletion of data for a specific book object.
-Book.prototype.deleteBook = function () {
-    const index = myLibrary.indexOf(this);
-    myLibrary.splice(index,1);
-    displayBooks(myLibrary)
-}
+
 
 //this function makes the form appear/disappear.
 const handleBookForm = function (){
